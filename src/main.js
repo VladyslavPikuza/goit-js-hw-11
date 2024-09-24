@@ -7,6 +7,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const searchForm = document.querySelector('#search-form');
 const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('#loader');
 
 searchForm.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -17,6 +18,8 @@ searchForm.addEventListener('submit', async (event) => {
     iziToast.error({ title: 'Error', message: 'Please enter a search query' });
     return;
   }
+
+   loader.style.display = 'block';
 
   try {
     const images = await fetchImages(query);
@@ -39,5 +42,8 @@ searchForm.addEventListener('submit', async (event) => {
     lightbox.refresh();
   } catch (error) {
     iziToast.error({ title: 'Error', message: 'Failed to fetch images' });
+  }
+  finally {
+    loader.style.display = 'none';
   }
 });
