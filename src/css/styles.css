@@ -6,3 +6,51 @@
 */
 /* Common styles */
 @import url('./reset.css');
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px; 
+  padding: 20px;
+  list-style-type: none;
+  margin: 0;
+}
+
+
+.photo-card {
+  border: 1px solid #808080;
+  overflow: hidden; 
+  width: 360px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.photo-card:hover {
+  transform: scale(1.05); 
+}
+
+
+.photo-card img {
+width: 100%;
+  height: 152px;
+  object-fit: cover;
+  display: block;
+}
+
+
+.info {
+  display: flex;
+    justify-content: space-between;
+    text-align: center;
+  padding: 4px 20px;
+}
+
+.info p {
+  margin: 5px 0; /* Отступы между строками информации */
+}
+
+
+.gallery a {
+  display: block; 
+}
