@@ -1,3 +1,6 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 export function renderGallery(images) {
   const gallery = document.querySelector('.gallery');
   const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
@@ -17,14 +20,13 @@ export function renderGallery(images) {
 
   gallery.insertAdjacentHTML('beforeend', markup);
 
-  
-  new SimpleLightbox('.gallery a', { /* опции */ }).refresh();
+  // Инициализация SimpleLightbox после добавления изображений
+  const lightbox = new SimpleLightbox('.gallery a', { /* опции */ });
+  lightbox.refresh();
 }
 
 export function clearGallery() {
   const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = ''; 
+  gallery.innerHTML = ''; // Очищаем галерею
 }
-
-
 
