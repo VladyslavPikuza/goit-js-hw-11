@@ -19,7 +19,7 @@ searchForm.addEventListener('submit', async (event) => {
     return;
   }
 
-   loader.style.display = 'block';
+  loader.style.display = 'block'; 
 
   try {
     const images = await fetchImages(query);
@@ -30,10 +30,8 @@ searchForm.addEventListener('submit', async (event) => {
     }
 
     clearGallery();
-
     renderGallery(images);
 
-    
     const lightbox = new SimpleLightbox('.gallery a', {
       captionsData: 'alt',
       captionDelay: 250,
@@ -42,8 +40,7 @@ searchForm.addEventListener('submit', async (event) => {
     lightbox.refresh();
   } catch (error) {
     iziToast.error({ title: 'Error', message: 'Failed to fetch images' });
-  }
-  finally {
-    loader.style.display = 'none';
+  } finally {
+    loader.style.display = 'none'; 
   }
 });
