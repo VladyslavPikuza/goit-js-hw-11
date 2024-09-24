@@ -30,8 +30,12 @@ searchForm.addEventListener('submit', async (event) => {
 
     renderGallery(images);
 
-    // Инициализация SimpleLightbox после добавления изображений
-    const lightbox = new SimpleLightbox('.gallery a', { /* опции */ });
+    
+    const lightbox = new SimpleLightbox('.gallery a', {
+      captionsData: 'alt',
+      captionDelay: 250,
+      close: true,
+    });
     lightbox.refresh();
   } catch (error) {
     iziToast.error({ title: 'Error', message: 'Failed to fetch images' });

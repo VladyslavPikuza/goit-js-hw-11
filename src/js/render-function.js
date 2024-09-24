@@ -20,13 +20,15 @@ export function renderGallery(images) {
 
   gallery.insertAdjacentHTML('beforeend', markup);
 
-  // Инициализация SimpleLightbox после добавления изображений
-  const lightbox = new SimpleLightbox('.gallery a', { /* опции */ });
+  
+  const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt',
+      captionDelay: 250,
+      close: true,});
   lightbox.refresh();
 }
 
 export function clearGallery() {
   const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = ''; // Очищаем галерею
+  gallery.innerHTML = ''; 
 }
 
