@@ -1,34 +1,29 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 export function renderGallery(images) {
-  const gallery = document.getElementById('gallery');
-  
-  const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views }) => {
+  const gallery = document.querySelector('.gallery');
+  const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
     return `
-      <a href="${largeImageURL}" class="gallery-item">
-        <img src="${webformatURL}" alt="${tags}" />
+      <div class="photo-card">
+        <a href="${largeImageURL}">
+          <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+        </a>
         <div class="info">
-          <p>Likes: ${likes}</p>
-          <p>Views: ${views}</p>
+          <p><b>Likes:</b> ${likes}</p>
+          <p><b>Views:</b> ${views}</p>
+          <p><b>Comments:</b> ${comments}</p>
+          <p><b>Downloads:</b> ${downloads}</p>
         </div>
-      </a>`;
+      </div>`;
   }).join('');
-  
-  gallery.innerHTML = markup;
-  
-  
-  const lightbox = new SimpleLightbox('.gallery-item', { captionsData: 'alt', captionDelay: 250 });
-  lightbox.refresh();
 
-  console.log("renderGallery function called");
+  gallery.insertAdjacentHTML('beforeend', markup);
+
+  // Активируем SimpleLightbox после добавления изображений
+  new SimpleLightbox('.gallery a', { /* опции */ }).refresh();
 }
 
 export function clearGallery() {
-  const gallery = document.getElementById('gallery');
-  gallery.innerHTML = '';
-
-  console.log("clearGallery function called");
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = ''; // Очищаем галерею
 }
 
 

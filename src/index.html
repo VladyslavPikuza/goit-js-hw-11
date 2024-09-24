@@ -13,17 +13,12 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <form id="search-form"></form>
-    <input
-      type="text"
-      id="search-query"
-      placeholder="Enter search term..."
-      required
-    />
-    <button type="submit">Search</button>
-    <div id="gallery"></div>
+    <form id="search-form">
+      <input type="text" name="searchQuery" placeholder="Search images..." />
+      <button type="submit">Search</button>
+    </form>
 
-    <div id="loader" class="hidden">Loading...</div>
+    <div class="gallery"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <script type="module" src="./main.js"></script>

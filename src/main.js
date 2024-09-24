@@ -3,42 +3,38 @@ import { renderGallery, clearGallery } from './js/render-function.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const form = document.getElementById('search-form');
-const gallery = document.getElementById('gallery');
-const loader = document.getElementById('loader');
 
-form.addEventListener('submit', async (event) => {
+const searchForm = document.querySelector('#search-form');
+const gallery = document.querySelector('.gallery');
+
+
+searchForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const query = document.getElementById('search-query').value.trim();
 
-  if (!query) {
-    iziToast.error({ title: 'Error', message: 'Please enter a search term!' });
+  const query = event.target.elements.searchQuery.value.trim();
+
+  
+  if (query === '') {
+    iziToast.error({ title: 'Error', message: 'Please enter a search query' });
     return;
   }
 
-  clearGallery();  
-  showLoader();  
-
+ 
   try {
     const images = await fetchImages(query);
 
+ 
     if (images.length === 0) {
-      iziToast.error({ title: 'Error', message: 'No images found for this query!' });
-    } else {
-      renderGallery(images);
-      iziToast.success({ title: 'Success', message: `Found ${images.length} images!` });
+      iziToast.error({ title: 'No results', message: 'No images found for your search query' });
+      return;
     }
+
+   
+    clearGallery();
+    
+    
+    renderGallery(images);
   } catch (error) {
-    iziToast.error({ title: 'Error', message: 'Something went wrong. Try again later.' });
-  } finally {
-    hideLoader();  
+    iziToast.error({ title: 'Error', message: 'Failed to fetch images' });
   }
 });
-
-function showLoader() {
-  loader.classList.remove('hidden');
-}
-
-function hideLoader() {
-  loader.classList.add('hidden');
-}
