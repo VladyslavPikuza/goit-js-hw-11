@@ -17,13 +17,13 @@ export function renderGallery(images) {
 
   gallery.insertAdjacentHTML('beforeend', markup);
 
-  // Активируем SimpleLightbox после добавления изображений
+  
   new SimpleLightbox('.gallery a', { /* опции */ }).refresh();
 }
 
 export function clearGallery() {
   const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = ''; // Очищаем галерею
+  gallery.innerHTML = ''; 
 }
 
 
