@@ -6,13 +6,22 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const searchForm = document.querySelector('#search-form');
-const gallery = document.querySelector('.gallery');
 const loader = document.querySelector('#loader');
+
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  close: true,
+});
 
 searchForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const query = event.target.elements.searchQuery.value.trim();
+
+  
+  clearGallery();
 
   if (query === '') {
     iziToast.error({ title: 'Error', message: 'Please enter a search query' });
@@ -29,14 +38,9 @@ searchForm.addEventListener('submit', async (event) => {
       return;
     }
 
-    clearGallery();
     renderGallery(images);
 
-    const lightbox = new SimpleLightbox('.gallery a', {
-      captionsData: 'alt',
-      captionDelay: 250,
-      close: true,
-    });
+   
     lightbox.refresh();
   } catch (error) {
     iziToast.error({ title: 'Error', message: 'Failed to fetch images' });
@@ -44,3 +48,4 @@ searchForm.addEventListener('submit', async (event) => {
     loader.style.display = 'none'; 
   }
 });
+
